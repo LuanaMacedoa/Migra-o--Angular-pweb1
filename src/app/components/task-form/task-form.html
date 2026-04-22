@@ -1,0 +1,28 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black/40">
+
+  <div class="bg-white p-6 rounded w-full max-w-md">
+
+    <h2 class="text-lg font-bold mb-4">Nova tarefa</h2>
+
+    <form (submit)="submit(); $event.preventDefault()">
+
+      <input [(ngModel)]="task.title" name="title" placeholder="Título" class="w-full mb-2 p-2 border rounded" />
+
+      <input type="date" [(ngModel)]="task.due" name="due" class="w-full mb-2 p-2 border rounded" />
+
+      <select [(ngModel)]="task.level" name="level" class="w-full mb-2 p-2 border rounded">
+        <option value="low">Baixo</option>
+        <option value="medium">Médio</option>
+        <option value="high">Alto</option>
+      </select>
+
+      <textarea [(ngModel)]="task.desc" name="desc" placeholder="Descrição" class="w-full mb-2 p-2 border rounded"></textarea>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button type="button" (click)="cancel()">Cancelar</button>
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Salvar</button>
+      </div>
+
+    </form>
+  </div>
+</div>
