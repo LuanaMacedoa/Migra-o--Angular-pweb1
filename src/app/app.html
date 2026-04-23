@@ -28,16 +28,17 @@
 
     </div>
 
-    <app-task-list></app-task-list>
+    <app-task-list (editTask)="openEditModal($event)"></app-task-list>
 
     <app-task-form
       *ngIf="isModalOpen()"
-      (save)="addTaskFromForm($event)"
+      [editingTask]="taskBeingEdited()"
+      (save)="handleSave($event)"
       (close)="closeModal()">
     </app-task-form>
 
     <footer class="mt-12 pt-6 border-t border-slate-200 text-sm text-slate-500">
-      Salvo no armazenamento local do seu navegador. (Nota: Na sua versão Angular, isto é apenas visual).
+      Salvo no armazenamento local do seu navegador.
     </footer>
 
   </div>

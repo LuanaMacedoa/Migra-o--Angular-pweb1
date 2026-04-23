@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
 import { TaskCardComponent } from '../task-card/task-card';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-task-list',
@@ -23,8 +24,11 @@ export class TaskListComponent {
     this.taskService.moveTask(task.id, status);
   }
 
-  onEditRequest(task: any) {
-    // ainda não implementado (evita erro de compilação)
-    console.log('editar:', task);
-  }
+  @Output() editTask = new EventEmitter<any>();
+
+onEditRequest(task: any) {
+  this.editTask.emit(task);
+}
+
+  
 }
