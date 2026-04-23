@@ -1,69 +1,48 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<main>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4" cdkDropListGroup>
+    <div>
+      <h2 class="font-semibold mb-2 text-slate-800">Para fazer</h2>
+      <div 
+        id="col-todo"
+        cdkDropList [cdkDropListData]="getByStatus('todo')" (cdkDropListDropped)="drop($event, 'todo')"
+        class="space-y-3 min-h-[200px] p-3 bg-white rounded shadow-sm border border-slate-100">
+        <app-task-card 
+          *ngFor="let t of getByStatus('todo')" 
+          cdkDrag [cdkDragData]="t" [task]="t"
+          (remove)="taskService.deleteTask($event)" 
+          (edit)="onEditRequest($event)">
+        </app-task-card>
+      </div>
+    </div>
 
-  <!-- TODO -->
-  <div
-    cdkDropList
-    [cdkDropListData]="getByStatus('todo')"
-    (cdkDropListDropped)="drop($event, 'todo')"
-    class="space-y-4">
+    <div>
+      <h2 class="font-semibold mb-2 text-slate-800">Em andamento</h2>
+      <div 
+        id="col-doing"
+        cdkDropList [cdkDropListData]="getByStatus('doing')" (cdkDropListDropped)="drop($event, 'doing')"
+        class="space-y-3 min-h-[200px] p-3 bg-white rounded shadow-sm border border-slate-100">
+        <app-task-card 
+          *ngFor="let t of getByStatus('doing')" 
+          cdkDrag [cdkDragData]="t" [task]="t"
+          (remove)="taskService.deleteTask($event)" 
+          (edit)="onEditRequest($event)">
+        </app-task-card>
+      </div>
+    </div>
 
-    <h2 class="font-bold text-lg text-slate-900 mb-3">Para fazer</h2>
-
-    <div class="space-y-3">
-
-      <app-task-card
-        *ngFor="let t of getByStatus('todo')"
-        cdkDrag
-        [cdkDragData]="t"
-        [task]="t"
-        (edit)="onEditRequest($event)">
-      </app-task-card>
-
+    <div>
+      <h2 class="font-semibold mb-2 text-slate-800">Concluídas</h2>
+      <div 
+        id="col-done"
+        cdkDropList [cdkDropListData]="getByStatus('done')" (cdkDropListDropped)="drop($event, 'done')"
+        class="space-y-3 min-h-[200px] p-3 bg-white rounded shadow-sm border border-slate-100">
+        <app-task-card 
+          *ngFor="let t of getByStatus('done')" 
+          cdkDrag [cdkDragData]="t" [task]="t"
+          (remove)="taskService.deleteTask($event)" 
+          (edit)="onEditRequest($event)">
+        </app-task-card>
+      </div>
     </div>
   </div>
-
-  <!-- DOING -->
-  <div
-    cdkDropList
-    [cdkDropListData]="getByStatus('doing')"
-    (cdkDropListDropped)="drop($event, 'doing')"
-    class="space-y-4">
-
-    <h2 class="font-bold text-lg text-slate-900 mb-3">Em andamento</h2>
-
-    <div class="space-y-3">
-
-      <app-task-card
-        *ngFor="let t of getByStatus('doing')"
-        cdkDrag
-        [cdkDragData]="t"
-        [task]="t"
-        (edit)="onEditRequest($event)">
-      </app-task-card>
-
-    </div>
-  </div>
-
-  <!-- DONE -->
-  <div
-    cdkDropList
-    [cdkDropListData]="getByStatus('done')"
-    (cdkDropListDropped)="drop($event, 'done')"
-    class="space-y-4">
-
-    <h2 class="font-bold text-lg text-slate-900 mb-3">Concluídas</h2>
-
-    <div class="space-y-3">
-
-      <app-task-card
-        *ngFor="let t of getByStatus('done')"
-        cdkDrag
-        [cdkDragData]="t"
-        [task]="t"
-        (edit)="onEditRequest($event)">
-      </app-task-card>
-
-    </div>
-  </div>
-
-</div>
+</main>
