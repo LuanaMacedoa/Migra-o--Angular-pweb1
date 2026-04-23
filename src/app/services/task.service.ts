@@ -13,10 +13,10 @@ export interface Task {
 export class TaskService {
   private readonly STORAGE_KEY = 'app_task_manager_tasks_v1';
 
-  // Usamos um Signal para o estado, iniciando com os dados do LocalStorage
+ 
   private tasksSignal = signal<Task[]>(this.loadTasks());
 
-  // Expondo como somente leitura para os componentes
+  
   tasks = this.tasksSignal.asReadonly();
 
   private loadTasks(): Task[] {
@@ -45,18 +45,18 @@ export class TaskService {
     return initialTasks;
   }
 
-  // Lógica exata de cores do seu JS original
+  
   getProximityColor(dueISO: string): string {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const due = new Date(dueISO);
     const diff = Math.ceil((due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-    if (diff < 0) return 'bg-gray-500'; // Passou do prazo
-    if (diff <= 1) return 'bg-red-500'; // Hoje ou amanhã
+    if (diff < 0) return 'bg-gray-500'; 
+    if (diff <= 1) return 'bg-red-500'; 
     if (diff <= 3) return 'bg-orange-400';
     if (diff <= 7) return 'bg-yellow-300';
-    return 'bg-green-400'; // Prazo folgado
+    return 'bg-green-400'; 
   }
 
   addTask(data: any) {
