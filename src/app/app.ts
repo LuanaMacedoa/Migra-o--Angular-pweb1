@@ -16,12 +16,12 @@ export class AppComponent {
 
   isModalOpen = signal(false);
 
-  newTask: Partial<Task> = {
+  newTask = signal<Partial<Task>>({
     title: '',
     due: '',
     level: 'low',
     desc: ''
-  };
+  });
 
   constructor(public taskService: TaskService) {}
 
@@ -33,22 +33,36 @@ export class AppComponent {
     this.isModalOpen.set(false);
   }
 
+  updateField(field: keyof Task, value: any) {
+    this.newTask.update(task => ({
+      ...task,
+      [field]: value
+    }));
+  }
+
   addTask() {
-    if (!this.newTask.title || !this.newTask.due) return;
+    const taskValue = this.newTask();
+
+    if (!taskValue.title || !taskValue.due) return;
 
     const task: Task = {
       id: Date.now().toString(),
-      title: this.newTask.title!,
-      due: this.newTask.due!,
-      level: this.newTask.level as any,
-      desc: this.newTask.desc || '',
+      title: taskValue.title!,
+      due: taskValue.due!,
+      level: taskValue.level as any,
+      desc: taskValue.desc || '',
       status: 'todo'
     };
 
     this.taskService.addTask(task);
 
-    // reset
-    this.newTask = { title: '', due: '', level: 'low', desc: '' };
+    this.newTask.set({
+      title: '',
+      due: '',
+      level: 'low',
+      desc: ''
+    });
+
     this.closeModal();
   }
 
@@ -57,13 +71,13 @@ export class AppComponent {
   }
 
   addTaskFromForm(data: any) {
-  const task = {
-    id: Date.now().toString(),
-    ...data,
-    status: 'todo'
-  };
+    const task = {
+      id: Date.now().toString(),
+      ...data,
+      status: 'todo'
+    };
 
-  this.taskService.addTask(task);
-  this.closeModal();
-}
+    this.taskService.addTask(task);
+    this.closeModal();
+  }
 }

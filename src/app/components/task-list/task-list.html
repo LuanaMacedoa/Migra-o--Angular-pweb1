@@ -1,39 +1,39 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-  <!-- TODO -->
-  <div>
-    <h2 class="font-semibold mb-2">Para fazer</h2>
+  <div class="bg-slate-100 p-3 rounded-lg space-y-3">
+    <h2 class="font-semibold">Para fazer</h2>
 
     <app-task-card
-        *ngFor="let t of getByStatus('todo')"
-        [task]="t"
-        (move)="taskService.moveTask($event.id, $event.status)"
-        (remove)="taskService.deleteTask($event)">
+      *ngFor="let t of getByStatus('todo')"
+      [task]="t"
+      (move)="taskService.moveTask($event.id, $event.status)"
+      (remove)="taskService.deleteTask($event)">
     </app-task-card>
+
   </div>
 
-  <!-- DOING -->
-  <div>
-    <h2 class="font-semibold mb-2">Em andamento</h2>
+  <div class="bg-slate-100 p-3 rounded-lg space-y-3">
+    <h2 class="font-semibold">Em andamento</h2>
 
     <app-task-card
-        *ngFor="let t of getByStatus('doing')"
-        [task]="t"
-        (move)="taskService.moveTask($event.id, $event.status)"
-        (remove)="taskService.deleteTask($event)">
+      *ngFor="let t of getByStatus('doing')"
+      [task]="t"
+      (move)="taskService.moveTask($event.id, $event.status)"
+      (remove)="taskService.deleteTask($event)">
     </app-task-card>
+
   </div>
 
-  <!-- DONE -->
-  <div>
-    <h2 class="font-semibold mb-2">Concluídas</h2>
+  <div class="bg-slate-100 p-3 rounded-lg space-y-3">
+    <h2 class="font-semibold">Concluídas</h2>
 
     <app-task-card
-        *ngFor="let t of getByStatus('done')"
-        [task]="t"
-        (move)="taskService.moveTask($event.id, $event.status)"
-        (remove)="taskService.deleteTask($event)">
+      *ngFor="let t of getByStatus('done')"
+      [task]="t"
+      (move)="taskService.moveTask($event.id, $event.status)"
+      (remove)="taskService.deleteTask($event)">
     </app-task-card>
+
   </div>
 
 </div>
