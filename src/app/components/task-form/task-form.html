@@ -1,54 +1,71 @@
 <div class="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
 
-  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
 
-    <h2 class="text-lg font-bold mb-4">Nova tarefa</h2>
+    <h2 class="text-lg font-bold mb-4 text-slate-800">
+
+      {{ isEditing ? 'Editar tarefa' : 'Nova tarefa' }}
+
+    </h2>
+
+
 
     <form (submit)="submit(); $event.preventDefault()">
 
-      <input
-        [(ngModel)]="task.title"
-        name="title"
-        placeholder="Título"
-        class="w-full mb-2 p-2 border rounded" />
+      <div class="space-y-3">
 
-      <input
-        type="date"
-        [(ngModel)]="task.due"
-        name="due"
-        class="w-full mb-2 p-2 border rounded" />
+        <div>
 
-      <select
-        [(ngModel)]="task.level"
-        name="level"
-        class="w-full mb-2 p-2 border rounded">
+          <label class="text-xs font-semibold text-slate-500 uppercase">Título</label>
 
-        <option value="low">Baixo</option>
-        <option value="medium">Médio</option>
-        <option value="high">Alto</option>
+          <input [(ngModel)]="task.title" name="title" class="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none" required />
 
-      </select>
+        </div>
 
-      <textarea
-        [(ngModel)]="task.desc"
-        name="desc"
-        placeholder="Descrição"
-        class="w-full mb-2 p-2 border rounded">
-      </textarea>
+        <div>
 
-      <div class="flex justify-end gap-2 mt-4">
+          <label class="text-xs font-semibold text-slate-500 uppercase">Data término</label>
 
-        <button
-          type="button"
-          (click)="cancel()"
-          class="px-3 py-1 border rounded hover:bg-slate-100 cursor-pointer transition">
-          Cancelar
-        </button>
+          <input type="date" [(ngModel)]="task.due" name="due" class="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none" required />
 
-        <button
-          type="submit"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded cursor-pointer transition active:scale-95">
-          Salvar
+        </div>
+
+        <div>
+
+          <label class="text-xs font-semibold text-slate-500 uppercase">Prioridade</label>
+
+          <select [(ngModel)]="task.level" name="level" class="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none">
+
+            <option value="low">Baixa</option>
+
+            <option value="medium">Média</option>
+
+            <option value="high">Alta</option>
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label class="text-xs font-semibold text-slate-500 uppercase">Descrição</label>
+
+          <textarea [(ngModel)]="task.desc" name="desc" rows="3" class="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="flex justify-end gap-2 mt-6">
+
+        <button type="button" (click)="close.emit()" class="px-4 py-2 text-slate-600 border rounded hover:bg-slate-50 transition cursor-pointer">Cancelar</button>
+
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 active:scale-95 transition cursor-pointer">
+
+          {{ isEditing ? 'Atualizar' : 'Salvar' }}
+
         </button>
 
       </div>

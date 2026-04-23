@@ -1,18 +1,31 @@
-<div class="bg-slate-50 min-h-screen p-6">
+<div class="bg-slate-50 min-h-screen p-6 font-sans">
+
   <div class="max-w-6xl mx-auto">
 
     <header class="mb-6">
       <h1 class="text-3xl font-bold text-slate-800">
-        Gerenciador de Tarefas
+        Gerenciador de Tarefas - Estudos
       </h1>
+      <p class="text-slate-600 mt-1">Cards em 3 colunas: Para fazer, Em andamento, Concluídas.</p>
     </header>
 
-    <div class="mb-6 flex justify-end">
-      <button
-        (click)="openModal()"
-        class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition text-white px-4 py-2 rounded cursor-pointer">
-        + Nova Tarefa
-    </button>
+    <div class="mb-6 flex items-center justify-between">
+
+      <div>
+        <p class="text-slate-600">
+          Adicione novas tarefas pelo botão <span class="font-semibold text-indigo-600">+</span>.
+        </p>
+      </div>
+
+      <div>
+        <button
+          (click)="openModal()"
+          aria-label="Adicionar tarefa"
+          class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-2xl hover:bg-indigo-700 active:scale-95 transition cursor-pointer">
+          +
+        </button>
+      </div>
+
     </div>
 
     <app-task-list></app-task-list>
@@ -22,6 +35,10 @@
       (save)="addTaskFromForm($event)"
       (close)="closeModal()">
     </app-task-form>
+
+    <footer class="mt-12 pt-6 border-t border-slate-200 text-sm text-slate-500">
+      Salvo no armazenamento local do seu navegador. (Nota: Na sua versão Angular, isto é apenas visual).
+    </footer>
 
   </div>
 </div>

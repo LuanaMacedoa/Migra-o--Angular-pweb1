@@ -1,61 +1,73 @@
-<div class="border rounded-lg bg-white shadow-sm p-4 flex flex-col justify-between min-h-[170px] transition">
+<div class="p-4 border border-slate-200 rounded-md bg-white shadow-sm flex flex-col h-full justify-between hover:shadow-md transition-shadow">
 
-  <!-- HEADER -->
-  <div class="flex justify-between items-start">
+  <div>
 
-    <div>
-      <div class="font-semibold text-slate-800">
-        {{ task.title }}
+    <div class="flex items-start justify-between gap-2">
+
+      <div class="flex items-center gap-3">
+
+        <span class="w-3.5 h-3.5 rounded-full inline-block shrink-0"
+
+          [ngClass]="{
+
+            'bg-red-500': task.level === 'high',
+
+            'bg-yellow-400': task.level === 'medium',
+
+            'bg-green-400': task.level === 'low'
+
+          }">
+
+        </span>
+
+        <div>
+
+          <div class="font-semibold text-slate-800 text-base leading-tight">{{ task.title }}</div>
+
+          <div class="text-xs text-slate-500 mt-0.5">
+
+            Término: {{ task.due }} •
+
+            <span class="font-medium text-slate-600">
+
+              {{ task.level === 'high' ? 'Alta' : task.level === 'medium' ? 'Média' : 'Baixa' }}
+
+            </span>
+
+          </div>
+
+        </div>
+
       </div>
-      <div class="text-xs text-slate-500">
-        {{ task.due }}
+
+
+
+      <div class="text-right flex items-center gap-2">
+
+        <button (click)="onEditClick()" class="text-xs text-slate-400 hover:text-slate-800 cursor-pointer transition">
+
+          Editar
+
+        </button>
+
+        <button (click)="onDeleteClick()" class="text-xs text-red-400 hover:text-red-600 font-medium cursor-pointer transition">
+
+          Excluir
+
+        </button>
+
       </div>
+
     </div>
 
-    <!-- PRIORIDADE -->
-    <span
-      class="text-xs px-2 py-1 rounded font-semibold cursor-default"
-      [ngClass]="{
-        'bg-red-500 text-white': task.level === 'high',
-        'bg-yellow-400 text-black': task.level === 'medium',
-        'bg-green-500 text-white': task.level === 'low'
-      }">
-      {{ task.level }}
-    </span>
+   
+
+    <p *ngIf="task.desc" class="mt-2.5 text-sm text-slate-600 leading-relaxed pl-6.5">
+
+      {{ task.desc }}
+
+    </p>
 
   </div>
-
-  <!-- DESCRIÇÃO -->
-  <p class="text-sm text-slate-600 mt-2 max-h-16 overflow-hidden">
-    {{ task.desc }}
-  </p>
-
-  <!-- BOTÕES -->
-  <div class="flex gap-2 mt-3 text-xs">
-
-    <button (click)="setStatus('todo')"
-      class="px-2 py-1 border rounded hover:bg-slate-100 cursor-pointer transition active:scale-95">
-      Todo
-    </button>
-
-    <button (click)="setStatus('doing')"
-      class="px-2 py-1 border rounded hover:bg-slate-100 cursor-pointer transition active:scale-95">
-      Doing
-    </button>
-
-    <button (click)="setStatus('done')"
-      class="px-2 py-1 border rounded hover:bg-slate-100 cursor-pointer transition active:scale-95">
-      Done
-    </button>
-
-    <button (click)="delete()"
-      class="ml-auto text-red-500 hover:text-red-700 cursor-pointer transition">
-      Excluir
-    </button>
-
-  </div>
-
-  
 
 </div>
-

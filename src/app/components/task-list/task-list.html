@@ -1,39 +1,69 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-  <div class="bg-slate-100 p-3 rounded-lg space-y-3">
-    <h2 class="font-semibold">Para fazer</h2>
+  <!-- TODO -->
+  <div
+    cdkDropList
+    [cdkDropListData]="getByStatus('todo')"
+    (cdkDropListDropped)="drop($event, 'todo')"
+    class="space-y-4">
 
-    <app-task-card
-      *ngFor="let t of getByStatus('todo')"
-      [task]="t"
-      (move)="taskService.moveTask($event.id, $event.status)"
-      (remove)="taskService.deleteTask($event)">
-    </app-task-card>
+    <h2 class="font-bold text-lg text-slate-900 mb-3">Para fazer</h2>
 
+    <div class="space-y-3">
+
+      <app-task-card
+        *ngFor="let t of getByStatus('todo')"
+        cdkDrag
+        [cdkDragData]="t"
+        [task]="t"
+        (edit)="onEditRequest($event)">
+      </app-task-card>
+
+    </div>
   </div>
 
-  <div class="bg-slate-100 p-3 rounded-lg space-y-3">
-    <h2 class="font-semibold">Em andamento</h2>
+  <!-- DOING -->
+  <div
+    cdkDropList
+    [cdkDropListData]="getByStatus('doing')"
+    (cdkDropListDropped)="drop($event, 'doing')"
+    class="space-y-4">
 
-    <app-task-card
-      *ngFor="let t of getByStatus('doing')"
-      [task]="t"
-      (move)="taskService.moveTask($event.id, $event.status)"
-      (remove)="taskService.deleteTask($event)">
-    </app-task-card>
+    <h2 class="font-bold text-lg text-slate-900 mb-3">Em andamento</h2>
 
+    <div class="space-y-3">
+
+      <app-task-card
+        *ngFor="let t of getByStatus('doing')"
+        cdkDrag
+        [cdkDragData]="t"
+        [task]="t"
+        (edit)="onEditRequest($event)">
+      </app-task-card>
+
+    </div>
   </div>
 
-  <div class="bg-slate-100 p-3 rounded-lg space-y-3">
-    <h2 class="font-semibold">Concluídas</h2>
+  <!-- DONE -->
+  <div
+    cdkDropList
+    [cdkDropListData]="getByStatus('done')"
+    (cdkDropListDropped)="drop($event, 'done')"
+    class="space-y-4">
 
-    <app-task-card
-      *ngFor="let t of getByStatus('done')"
-      [task]="t"
-      (move)="taskService.moveTask($event.id, $event.status)"
-      (remove)="taskService.deleteTask($event)">
-    </app-task-card>
+    <h2 class="font-bold text-lg text-slate-900 mb-3">Concluídas</h2>
 
+    <div class="space-y-3">
+
+      <app-task-card
+        *ngFor="let t of getByStatus('done')"
+        cdkDrag
+        [cdkDragData]="t"
+        [task]="t"
+        (edit)="onEditRequest($event)">
+      </app-task-card>
+
+    </div>
   </div>
 
 </div>
